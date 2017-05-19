@@ -54,7 +54,7 @@ namespace Blog.Filters
 
 
         /// <summary>
-        /// SECURITY A7 Checks to see if our response status code is greater than399. if it is, we update our bad attempts.
+        /// A7 SECURITY Checks to see if our response status code is greater than399. if it is, we update our bad attempts.
         /// </summary>
         /// <param name="context"></param>
         public override void OnActionExecuted(ActionExecutedContext context)

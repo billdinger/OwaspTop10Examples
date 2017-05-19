@@ -1,67 +1,67 @@
 @using System.Collections.Generic
 @model System.Collections.Generic.IEnumerable<Blog.Models.BlogEntry>
 
-    @{
+@{
     ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<h1 id="xss">Welcome </h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Published)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Published)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* A3 SECURITY - THIS IS A SECURITY VULNERABILITY AND GIVES AN XSS VULNERABILITY TO OUR APPLICATION. *@
+<script>
+    var name = document.location.search.split("=")[1];
+    if (name !== 'undefined') {
+        document.getElementById("xss").innerHTML = "Welcome " + name;
+        //the "correct" way to do this is you must:
+        // document.getElementById("xss").textContent = "Welcome " + name;
     }
 
-    <h2>Index</h2>
-
-    @* A3 SECURITY - THIS IS A SECURITY VULNERABILITY AND GIVES AN XSS VULNERABILITY TO OUR APPLICATION. *@
-    <script>
-        var name = document.location.search.split("=")[1];
-        if (name !== 'undefined') {
-            document.getElementById("xss").innerHTML = "Welcome " + name;
-            //the "correct" way to do this is you must:
-            // document.getElementById("xss").textContent = "Welcome " + name;
-        }
-
-    </script>
-
-    <h1 id="xss">Welcome </h1>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Body)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Author)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Published)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-        {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Body)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Author)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Published)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-        }
-        </tbody>
-    </table>
+</script>

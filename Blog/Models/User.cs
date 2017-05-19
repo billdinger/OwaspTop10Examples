@@ -20,7 +20,7 @@
         }
 
         /// <summary>
-        /// SECURITY This safely doesn't log the password out when called.
+        /// A7 SECURITY This safely doesn't log the password out when called.
         /// </summary>
         /// <returns>A string representation of all the properties except password.</returns>
         public string SafeToString()

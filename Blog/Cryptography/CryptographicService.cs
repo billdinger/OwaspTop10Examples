@@ -67,7 +67,7 @@ namespace Blog.Cryptography
         }
 
         /// <summary>
-        /// SECURITY This correctly hashes and salts a password with 50,000 iterations.
+        /// A2 SECURITY This correctly hashes and salts a password with 50,000 iterations.
         /// </summary>
         /// <param name="password">The value to hash.</param>
         /// <param name="salt">The salt to use.</param>

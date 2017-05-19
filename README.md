@@ -35,7 +35,7 @@ Fixed in the safeToString method in user by properly not sending the password in
 
 # A7 - Insufficient Attack Protection.
 Our methods are simply rejecting invalid input in our controllers by using ModelState.IsValid checks and then just returning BadRequest. To properly
-prevent attackers from keep attacking we can add (for example) a max bad request filter on a per action level. Once a limit is reached all requests will be dumped. This simple filter is implemented in the Filters\BadRequestFilter.cs
+prevent attackers from keep attacking we can add (for example) a max bad request filter on a per action level. Once a limit is reached all requests will be dumped. This simple filter is implemented in the Filters\BadRequestFilter.cs and applied on UsersController.cs Delete method.
 
 # A8 - Cross-Site Request Forgery
 Our users controller Edit method doesn't have [ValidateAntiForgeryToken] marked, making it vulnerable to a CSRF attack. This is fixed in all other
