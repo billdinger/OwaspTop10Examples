@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Blog.Models;
-using Microsoft.CodeAnalysis.Semantics;
 
 namespace Blog
 {
@@ -44,7 +43,7 @@ namespace Blog
 
 
         /// <summary>
-        /// SECURITY This method can accidentally introduce a security flaw. The env.IsDevelopment sets us to use
+        /// A5 SECURITY This method can accidentally introduce a security flaw. The env.IsDevelopment sets us to use
         /// Developer Exception page which will link stack trace information to the browser window.
         /// </summary>
         /// <param name="app"></param>

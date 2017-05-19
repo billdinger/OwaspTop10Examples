@@ -44,7 +44,7 @@ namespace Blog.Controllers
 
      
         /// <summary>
-        /// SECURITY - This is an example of a SQL Injection attack! OWASP #1 - DO NOT
+        /// A1 SECURITY - This is an example of a SQL Injection attack! OWASP #1 - DO NOT
         /// EVER USE THIS IN PRODUCTION CODE. In this case any arbitrary values entered
         /// by our user in the Body or Author fields on our form will get posted ot SQL
         /// Exposing us to not only SQL Injection by Stored XSS.

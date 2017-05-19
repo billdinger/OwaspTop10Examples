@@ -12,7 +12,7 @@ namespace Blog.Cryptography
         private const int Iterations = 50000;
 
         /// <summary>
-        /// This takes in a password and a salt and "hashes" the result. There are two private methods in this class
+        /// A2 SECURITY This takes in a password and a salt and "hashes" the result. There are two private methods in this class
         /// one will correctly hash, the other actually uses the Hash as a key (sad panda) and then 
         /// stores the password using reversible encryption.
         /// </summary>
@@ -29,7 +29,7 @@ namespace Blog.Cryptography
         }
 
         /// <summary>
-        /// SECURITY This is a demonstration on how NOT to store passwords -- with reversible encryption.
+        /// A2 SECURITY This is a demonstration on how NOT to store passwords -- with reversible encryption.
         /// NEVER USE THIS in production! This uses the "salt" improperly as the initialization vector, uses a hardcoded
         /// key in constants and stores the password with AES - a reversible encryption.
         /// </summary>

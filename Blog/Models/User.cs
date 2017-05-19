@@ -10,7 +10,7 @@
         public string Password { get; set; }
 
         /// <summary>
-        /// SECURITY Critical vulnerability, this logs out the user's password as a string!
+        /// A7 SECURITY Critical vulnerability, this logs out the user's password as a string!
         /// </summary>
         /// <returns>The string value of all the properties on the user.</returns>
         public override string ToString()

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Blog.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Controllers
 {
@@ -48,7 +47,7 @@ namespace Blog.Controllers
 
 
         /// <summary>
-        /// SECURITY This entry should be decorated with an Authorize attribute so that only logged
+        /// A4 SECURITY This entry should be decorated with an Authorize attribute so that only logged
         /// in users cant submit blog entries.
         /// </summary>
         /// <param name="blogEntry">The blog entry to create</param>

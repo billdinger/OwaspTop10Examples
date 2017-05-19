@@ -1,12 +1,11 @@
 ﻿using System.Collections.Concurrent;
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Blog.Filters
 {
     /// <summary>
-    /// Security A7 This filter checks every response, if the response code is greater than 400 
+    /// A7  Security This filter checks every response, if the response code is greater than 400 
     /// it increments attempts allowed. Upon reaching the BadAttempts count it will start
     /// rejecting all requests.
     /// </summary>
@@ -32,7 +31,7 @@ namespace Blog.Filters
 
 
         /// <summary>
-        /// SECURITY A7 this checks every incoming request, if the action exists in our bad request filter
+        /// A7 SECURITY this checks every incoming request, if the action exists in our bad request filter
         /// AND it exceeds our max attempts allowed we set the request to a bad result and return it to the 
         /// user.
         /// </summary>

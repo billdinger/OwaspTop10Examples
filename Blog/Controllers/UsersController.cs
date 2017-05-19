@@ -59,7 +59,7 @@ namespace Blog.Controllers
 
 
         /// <summary>
-        /// SECURITY this method calls ToString() on user which outputs the user's password, exposing a critical
+        /// A7 SECURITY this method calls ToString() on user which outputs the user's password, exposing a critical
         ///  part of user data to the log files.
         /// </summary>
         /// <param name="user">The user to create.</param>
@@ -99,7 +99,7 @@ namespace Blog.Controllers
         }
 
         /// <summary>
-        /// SECURITY A8 This method is vulnerable to CSRF as it's missing a [ValidateAntiForgeryToken] attribute.
+        /// A8 SECURITY This method is vulnerable to CSRF as it's missing a [ValidateAntiForgeryToken] attribute.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="user"></param>
@@ -135,6 +135,11 @@ namespace Blog.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// A7 - This method properly tracks bad requests and rejects them once they have reached too many requests.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [BadRequestFilter(MaxAttemptsAllowed = 100)]
         public async Task<IActionResult> Delete(int? id)
         {
