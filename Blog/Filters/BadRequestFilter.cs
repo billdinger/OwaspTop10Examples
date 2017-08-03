@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace Blog.Filters
 {
     /// <summary>
-    /// A7  Security This filter checks every response, if the response code is greater than 400 
+    /// A7 Insufficient Attack Protection This filter checks every response, if the response code is greater than 400 
     /// it increments attempts allowed. Upon reaching the BadAttempts count it will start
     /// rejecting all requests.
     /// </summary>
@@ -31,7 +31,7 @@ namespace Blog.Filters
 
 
         /// <summary>
-        /// A7 SECURITY this checks every incoming request, if the action exists in our bad request filter
+        /// A7 Insufficient Attack Protection this checks every incoming request, if the action exists in our bad request filter
         /// AND it exceeds our max attempts allowed we set the request to a bad result and return it to the 
         /// user.
         /// </summary>
@@ -54,7 +54,8 @@ namespace Blog.Filters
 
 
         /// <summary>
-        /// A7 SECURITY Checks to see if our response status code is greater than399. if it is, we update our bad attempts.
+        /// A7 Insufficient Attack Protection Checks to see if our response status code is greater than 399. if it is,
+        /// we update our bad attempts.
         /// </summary>
         /// <param name="context"></param>
         public override void OnActionExecuted(ActionExecutedContext context)

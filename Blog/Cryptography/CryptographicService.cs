@@ -12,9 +12,9 @@ namespace Blog.Cryptography
         private const int Iterations = 50000;
 
         /// <summary>
-        /// A2 SECURITY This takes in a password and a salt and "hashes" the result. There are two private methods in this class
-        /// one will correctly hash, the other actually uses the Hash as a key (sad panda) and then 
-        /// stores the password using reversible encryption.
+        /// A2 Broken Authentication & Session Management -  This takes in a password and a salt and "hashes" the result.
+        /// There are two private methods in this class one will correctly hash, the other actually uses the Hash as a key 
+        /// (sad panda) and then stores the password using reversible encryption.
         /// </summary>
         /// <param name="password">The password as a string, no special encoding needed.</param>
         /// <param name="salt">The salt value as any arbitrary string. No special encoding needed.</param>
@@ -29,7 +29,7 @@ namespace Blog.Cryptography
         }
 
         /// <summary>
-        /// A2 SECURITY This is a demonstration on how NOT to store passwords -- with reversible encryption.
+        /// A2 Broken Authentication & Session Management -This is a demonstration on how NOT to store passwords -- with reversible encryption.
         /// NEVER USE THIS in production! This uses the "salt" improperly as the initialization vector, uses a hardcoded
         /// key in constants and stores the password with AES - a reversible encryption.
         /// </summary>
@@ -67,7 +67,7 @@ namespace Blog.Cryptography
         }
 
         /// <summary>
-        /// A2 SECURITY This correctly hashes and salts a password with 50,000 iterations.
+        /// A2 Broken Authentication & Session Management - This correctly hashes and salts a password with 50,000 iterations.
         /// </summary>
         /// <param name="password">The value to hash.</param>
         /// <param name="salt">The salt to use.</param>

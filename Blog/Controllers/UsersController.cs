@@ -59,8 +59,8 @@ namespace Blog.Controllers
 
 
         /// <summary>
-        /// A7 SECURITY this method calls ToString() on user which outputs the user's password, exposing a critical
-        ///  part of user data to the log files.
+        /// A6 Sensitive data exposure this method calls ToString() on user which outputs the user's password, 
+        /// exposing a critical part of user data to the log files.
         /// </summary>
         /// <param name="user">The user to create.</param>
         /// <returns></returns>
@@ -99,7 +99,7 @@ namespace Blog.Controllers
         }
 
         /// <summary>
-        /// A8 SECURITY This method is vulnerable to CSRF as it's missing a [ValidateAntiForgeryToken] attribute.
+        /// A8 Cross Site Request Forgery This method is vulnerable to CSRF as it's missing a [ValidateAntiForgeryToken] attribute.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="user"></param>
@@ -136,7 +136,8 @@ namespace Blog.Controllers
         }
 
         /// <summary>
-        /// A7 - This method properly tracks bad requests and rejects them once they have reached too many requests.
+        /// A7 - Insufficient Attack Protection - This method properly tracks bad requests and rejects 
+        /// them once they have reached too many requests.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
