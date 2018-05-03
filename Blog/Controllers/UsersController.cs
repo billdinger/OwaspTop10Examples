@@ -18,9 +18,9 @@ namespace Blog.Controllers
 
         private readonly ILogger<UsersController> _logger;
 
-        public UsersController(UserContext context, 
+        public UsersController(UserContext context,
             ICryptographicService cryptographicServices,
-            ILogger<UsersController>logger)
+            ILogger<UsersController> logger)
         {
             _context = context;
             _cryptographicServices = cryptographicServices;
@@ -59,7 +59,7 @@ namespace Blog.Controllers
 
 
         /// <summary>
-        /// A6 Sensitive data exposure this method calls ToString() on user which outputs the user's password, 
+        /// A3 - Sensitive data exposure - this method calls ToString() on user which outputs the user's password, 
         /// exposing a critical part of user data to the log files.
         /// </summary>
         /// <param name="user">The user to create.</param>
@@ -99,7 +99,9 @@ namespace Blog.Controllers
         }
 
         /// <summary>
-        /// A8 Cross Site Request Forgery This method is vulnerable to CSRF as it's missing a [ValidateAntiForgeryToken] attribute.
+        /// A8RC - Cross Site Request Forgery - This method is vulnerable to CSRF as it's missing a [ValidateAntiForgeryToken] attribute.
+        /// This was considered for the top 10 as part of the RC but was removed from the final version as it was felt the prevelance
+        /// of Anti CSRF frameworks, like ASP.NETs, removed the need for it. Preserved here for historical purposes.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="user"></param>
@@ -136,8 +138,9 @@ namespace Blog.Controllers
         }
 
         /// <summary>
-        /// A7 - Insufficient Attack Protection - This method properly tracks bad requests and rejects 
-        /// them once they have reached too many requests.
+        /// A7RC - Insufficient Attack Protection - This method properly tracks bad requests and rejects 
+        /// them once they have reached too many requests. This top 10 was considered for the Release Candidate but was left
+        /// off the final list, preserved here for historical purposes.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

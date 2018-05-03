@@ -43,7 +43,7 @@ namespace Blog
 
 
         /// <summary>
-        /// A5 Security Misconfiguration This method can accidentally introduce a security flaw. The env.IsDevelopment sets us to use
+        /// A6 - Security Misconfiguration - This method can accidentally introduce a security flaw. The env.IsDevelopment sets us to use
         /// Developer Exception page which will link stack trace information to the browser window.
         /// </summary>
         /// <param name="app"></param>
@@ -57,15 +57,19 @@ namespace Blog
 
             app.UseDeveloperExceptionPage();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            // A6 - incorrect
+            app.UseDeveloperExceptionPage();
+            
+            // A6 - correct
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //    app.UseBrowserLink();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //}
 
             app.UseStaticFiles();
 

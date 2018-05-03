@@ -10,7 +10,7 @@
         public string Password { get; set; }
 
         /// <summary>
-        /// A6 Sensitive Data Exposure Critical vulnerability, this logs out the user's password as a string!
+        /// A3 - Sensitive Data Exposure - Critical vulnerability, this logs out the user's password as a string!
         /// </summary>
         /// <returns>The string value of all the properties on the user.</returns>
         public override string ToString()
@@ -20,7 +20,7 @@
         }
 
         /// <summary>
-        /// A6 Sensitive Data Exposure This safely doesn't log the password out when called.
+        /// A3 - Sensitive Data Exposure - This safely doesn't log the password out when called.
         /// </summary>
         /// <returns>A string representation of all the properties except password.</returns>
         public string SafeToString()

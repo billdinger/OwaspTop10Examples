@@ -47,7 +47,7 @@ namespace Blog.Controllers
 
 
         /// <summary>
-        /// A4 broken access control This entry should be decorated with an Authorize attribute so that only logged
+        /// A5 - Broken access control - This entry should be decorated with an Authorize attribute so that only logged
         /// in users cant submit blog entries.
         /// </summary>
         /// <param name="blogEntry">The blog entry to create</param>

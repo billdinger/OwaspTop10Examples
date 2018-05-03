@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace Blog.Filters
 {
     /// <summary>
-    /// A7 Insufficient Attack Protection This filter checks every response, if the response code is greater than 400 
+    /// A7RC - Insufficient Attack Protection - This filter checks every response, if the response code is greater than 400 
     /// it increments attempts allowed. Upon reaching the BadAttempts count it will start
-    /// rejecting all requests.
+    /// rejecting all requests. This was removed from the final 2017 OWASP list, but preserved here for historical purposes.
     /// </summary>
     public class BadRequestFilter : ActionFilterAttribute
     {
@@ -31,9 +31,9 @@ namespace Blog.Filters
 
 
         /// <summary>
-        /// A7 Insufficient Attack Protection this checks every incoming request, if the action exists in our bad request filter
+        /// A7RC - Insufficient Attack Protection this checks every incoming request, if the action exists in our bad request filter
         /// AND it exceeds our max attempts allowed we set the request to a bad result and return it to the 
-        /// user.
+        /// user. This was removed from the final OWASP 2017 top 10 list, but preserved here for historical purposes.
         /// </summary>
         /// <param name="context"></param>
         public override void OnActionExecuting(ActionExecutingContext context)
@@ -54,8 +54,9 @@ namespace Blog.Filters
 
 
         /// <summary>
-        /// A7 Insufficient Attack Protection Checks to see if our response status code is greater than 399. if it is,
-        /// we update our bad attempts.
+        /// A7RC -  Insufficient Attack Protection - Checks to see if our response status code is greater than 399. if it is,
+        /// we update our bad attempts. This RC was removed from the final OWASP 2017 top 10 list, 
+        /// but preserved here for historical purposes.
         /// </summary>
         /// <param name="context"></param>
         public override void OnActionExecuted(ActionExecutedContext context)
