@@ -31,14 +31,20 @@ namespace Blog
 
             // add our custom services we need.
             services.AddSingleton<ICryptographicService, CryptographicService>();
+
+            // A1 - Injection - Note here we're using in memory databases to save some setup time, if you'd like you can swap these to use real
+            // sql servers instead for more applicable real world tests. In that case, replace the optons.UseInMemoryDatabase with
+            // options.UseSqlServer(Configuration.GetConnectionString("UserContext"))); for each context you want to use and then
+            // update the connection strings in appsettings.json as appropriate.
+
             services.AddDbContext<UserContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("UserContext")));
+                    options.UseInMemoryDatabase("UserContext"));
 
             services.AddDbContext<BlogEntryContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("BlogEntryContext")));
+                    options.UseInMemoryDatabase("BlogEntryContext"));
 
             services.AddDbContext<CommentContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("CommentContext")));
+                    options.UseInMemoryDatabase("CommentContext"));
         }
 
 
@@ -59,7 +65,7 @@ namespace Blog
 
             // A6 - incorrect
             app.UseDeveloperExceptionPage();
-            
+
             // A6 - correct
             //if (env.IsDevelopment())
             //{
