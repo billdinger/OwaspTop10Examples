@@ -163,6 +163,12 @@ namespace Blog.Controllers
         }
 
 
+        /// <summary>
+        /// A10 - Insufficient Logging & Monitoring - This action lets us delete a user without any sort of logging or monitoring
+        /// that it's occuring. The action simply occurs without anyone knowing about it.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

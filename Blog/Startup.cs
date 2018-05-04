@@ -1,4 +1,5 @@
-﻿using Blog.Cryptography;
+﻿using Audit.Core;
+using Blog.Cryptography;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -57,10 +58,9 @@ namespace Blog
         /// <param name="loggerFactory"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            // A10 - Logging & Auditing - adding log4net here to properly log out information.
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
-
+            loggerFactory.AddLog4Net();
             app.UseDeveloperExceptionPage();
 
             // A6 - incorrect
@@ -74,7 +74,7 @@ namespace Blog
             //}
             //else
             //{
-            //    app.UseExceptionHandler("/Home/Error");
+            //    app.UseExceptionHandler("/error");
             //}
 
             app.UseStaticFiles();
@@ -85,6 +85,11 @@ namespace Blog
                     name: "default",
                     template: "{controller=BlogEntries}/{action=Index}/{id?}");
             });
+
+            // A10 - Logging & Audit - Setup Audit to use log4net.
+            Audit.Core.Configuration.Setup()
+                .UseLog4net();
         }
+
     }
 }

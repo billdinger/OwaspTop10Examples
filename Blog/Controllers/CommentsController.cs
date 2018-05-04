@@ -1,18 +1,22 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Audit.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Blog.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Blog.Controllers
 {
     public class CommentsController : Controller
     {
         private readonly CommentContext _context;
+        private readonly ILogger _logger;
 
-        public CommentsController(CommentContext context)
+        public CommentsController(CommentContext context, ILogger logger)
         {
-            _context = context;    
+            _context = context;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
@@ -42,7 +46,7 @@ namespace Blog.Controllers
             return View();
         }
 
-     
+
         /// <summary>
         /// A1 - Injection - This is an example of a SQL Injection attack! OWASP #1 - DO NOT
         /// EVER USE THIS IN PRODUCTION CODE. In this case any arbitrary values entered
@@ -59,7 +63,7 @@ namespace Blog.Controllers
                 await _context.Database
                     .ExecuteSqlCommandAsync
                     ($"insert into comments Id,Body, Author Values ('{comment.Id}','{comment.Body}',''{comment.Author}");
-                
+
                 // Correct way to add a user that's not vulnerable to SQL Injection:
                 //_context.Add(comment);
                 //await _context.SaveChangesAsync();
@@ -83,36 +87,45 @@ namespace Blog.Controllers
             return View(comment);
         }
 
+        /// <summary>
+        /// A10 - Insufficient logging & Auditing. This uses the Audit.net framework for more comprehensive logging of the
+        /// action being taken.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="comment"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Body,Author")] Comment comment)
         {
-            if (id != comment.Id)
+            using (AuditScope.Create("Edit", () => comment))
             {
-                return NotFound();
-            }
+                if (id != comment.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(comment);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CommentExists(comment.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(comment);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!CommentExists(comment.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                return View(comment);
             }
-            return View(comment);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -132,10 +145,16 @@ namespace Blog.Controllers
             return View(comment);
         }
 
+        /// <summary>
+        /// A10 - Insufficent Logging & Monitoring - this method properly logs and audits all actions taken on it.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            _logger.LogInformation($"Deleting the comment id {0}", id);
             var comment = await _context.Comment.SingleOrDefaultAsync(m => m.Id == id);
             _context.Comment.Remove(comment);
             await _context.SaveChangesAsync();
