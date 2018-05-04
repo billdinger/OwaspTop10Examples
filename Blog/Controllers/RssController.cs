@@ -1,11 +1,38 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using System.Xml;
+using Blog.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Formatting = System.Xml.Formatting;
 
 namespace Blog.Controllers
 {
     public class RssController : Controller
     {
+        private readonly BlogEntryContext _context;
+
+        public RssController(BlogEntryContext context)
+        {
+            _context = context;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateFeed([FromBody] string content)
+        {
+
+            var entry = JsonConvert.DeserializeObject<BlogEntry>(content, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            });
+
+             _context.BlogEntry.Add(entry);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+
+        }
+
         /// <summary>
         /// A4 - XML External Entities (XXE) - This allows an external XML entity to be read and parsed as its default
         /// behavior is set to parse, allowing arbitrary fishing of information.

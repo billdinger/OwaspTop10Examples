@@ -39,6 +39,7 @@ An example of stored XSS is found in our index.cshtml in Views\Comments\Index.cs
 tag embedded into the comment will load every time.
 
 # A8 - Insecure Deserialization
+An example of insecure deserialization is in our RSS Controller / CreateFeed we are processing the data as typeHandling.Auto. To resolve this, should be using typeHandling.None.
 
 # A9 - Using Components with Known Vulnerabilities
 

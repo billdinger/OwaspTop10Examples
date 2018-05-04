@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Blog.Controllers
@@ -11,5 +12,6 @@ namespace Blog.Controllers
         {
             return View("Error");
         }
+
     }
 }
