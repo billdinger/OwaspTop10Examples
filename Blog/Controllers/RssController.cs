@@ -20,7 +20,8 @@ namespace Blog.Controllers
         /// <summary>
         /// A6 - Insecure Deserialization  - as this takes arbitrary content with typenameHandling set to auto
         /// it'll allow to you instantiate all sorts of random payloads - such as System.Io.FileINfo which would allow you to read
-        /// arbitrary date on the host computer.
+        /// arbitrary date on the host computer. See https://www.alphabot.com/security/blog/2017/net/How-to-configure-Json.NET-to-create-a-vulnerable-web-API.html 
+        /// for the original attack.
         /// </summary>
         /// <returns></returns>
         [HttpPost]
