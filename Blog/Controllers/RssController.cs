@@ -1,18 +1,18 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
+using Blog.Data;
 using Blog.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Formatting = System.Xml.Formatting;
 
 namespace Blog.Controllers
 {
     public class RssController : Controller
     {
-        private readonly BlogEntryContext _context;
+        private readonly FeedContext _context;
 
-        public RssController(BlogEntryContext context)
+        public RssController(FeedContext context)
         {
             _context = context;
         }
@@ -22,18 +22,25 @@ namespace Blog.Controllers
         /// it'll allow to you instantiate all sorts of random payloads - such as System.Io.FileINfo which would allow you to read
         /// arbitrary date on the host computer.
         /// </summary>
-        /// <param name="content"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> CreateFeed([FromBody] string content)
+        public async Task<IActionResult> CreateFeed()
         {
-
-            var entry = JsonConvert.DeserializeObject<BlogEntry>(content, new JsonSerializerSettings
+            string content = string.Empty;
+            using (Stream receiveStream = HttpContext.Request.Body)
             {
-                TypeNameHandling = TypeNameHandling.Auto
+                using (StreamReader reader = new StreamReader(receiveStream))
+                {
+                    content = reader.ReadToEnd();
+                }
+            }
+
+            var entry = JsonConvert.DeserializeObject<Feed>(content, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto // A6 - Insecure Deserailization - You shoudl instead use TypeNameHandling.None
             });
 
-             _context.BlogEntry.Add(entry);
+            _context.Add(entry);
             await _context.SaveChangesAsync();
 
             return Ok();

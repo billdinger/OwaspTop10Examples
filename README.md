@@ -42,7 +42,8 @@ tag embedded into the comment will load every time.
 An example of insecure deserialization is in our RSS Controller / CreateFeed we are processing the data as typeHandling.Auto. To resolve this, should be using typeHandling.None.
 
 # A9 - Using Components with Known Vulnerabilities
-No example present, but a good example of this to tie with A4 would be one of the services or APIs that were affected by XXE - see [The OWASP XXE .NET Cheat Sheet](https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#.NET) for a good list of vulnerable components in the .NET framework.
+No example present, but a good example of this to tie with A4 would be one of the services or APIs that were affected by XXE - see [The OWASP XXE .NET Cheat Sheet](https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#.NET) for a good list of vulnerable components in the .NET framework. Also are frameworks such as Nancy, Breeze,
+and DotNetNuke which at various points hav been vulnerable to A8 - Insecure Deserialization.
 
 # A10 - Insufficient Logging & Monitoring
 This is presents in usersController / delete which lets us delete users without logging access. It's fixed in 2 different ways. In the CommentsController / delete we log out there is an action occuring. The 

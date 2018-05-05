@@ -1,5 +1,6 @@
 ﻿using Audit.Core;
 using Blog.Cryptography;
+using Blog.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -46,6 +47,9 @@ namespace Blog
 
             services.AddDbContext<CommentContext>(options =>
                     options.UseInMemoryDatabase("CommentContext"));
+
+            services.AddDbContext<FeedContext>(options =>
+                options.UseInMemoryDatabase("FeedContext"));
         }
 
 

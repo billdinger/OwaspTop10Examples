@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Blog.Models;
