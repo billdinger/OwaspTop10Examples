@@ -70,7 +70,7 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.LogInformation($"Creating the user {User.ToString()}");
+                _logger.LogInformation($"Creating the user {user.ToString()}");
                 user.Salt = Guid.NewGuid().ToString("N");
                 user.Password = _cryptographicServices.HashPassword(user.Password, user.Salt);
 
