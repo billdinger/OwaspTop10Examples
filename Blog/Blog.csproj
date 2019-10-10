@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
-  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Audit.NET" Version="13.2.2" />
     <PackageReference Include="Audit.NET.log4net" Version="13.2.2" />
