@@ -63,7 +63,7 @@ namespace Blog
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             // A10 - Logging & Auditing - adding log4net here to properly log out information.
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddLog4Net();
             app.UseDeveloperExceptionPage();
 
